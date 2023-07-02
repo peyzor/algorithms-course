@@ -14,9 +14,12 @@ class Queue:
         if not self.tail:
             self.head = node
             self.tail = node
+            self.length += 1
+            return
 
         self.tail.next = node
         self.tail = node
+        self.length += 1
 
     def dequeu(self):
         if not self.head:
@@ -48,10 +51,8 @@ def main():
     q.enqueue(n3)
     q.enqueue(n4)
 
-    curr = q.head
-    while curr:
-        print(curr.value)
-        curr = curr.next
+    while q.length:
+        print(q.dequeu())
 
 
 
