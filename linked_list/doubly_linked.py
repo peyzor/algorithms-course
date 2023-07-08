@@ -29,7 +29,7 @@ class DoublyLinkedList:
             self.tail = node
             self.length += 1
             return
-        
+
         node.prev = self.tail
         self.tail.next = node
         self.tail = node
@@ -66,6 +66,63 @@ class DoublyLinkedList:
 
         return
 
+    def remove(self, value):
+        i = 0
+        curr = self.head
+        while curr and i < self.length:
+            if curr.value == value:
+                if curr.prev:
+                    curr.prev.next = curr.next
+
+                if curr.next:
+                    curr.next.prev = curr.prev
+
+                if curr == self.head:
+                    self.head = curr.next
+                if curr == self.tail:
+                    self.tail = curr.prev
+
+                curr.prev = None
+                curr.next = None
+                self.length -= 1
+                return curr.value
+
+            curr = curr.next
+
+    def get(self, idx):
+        i = 0
+        curr = self.head
+        while curr:
+            if i == idx:
+                return curr
+
+            curr = curr.next
+            i += 1
+
+    def remove_at(self, idx):
+        i = 0
+        curr = self.head
+        while curr:
+            if i == idx:
+                if curr.prev:
+                    curr.prev.next = curr.next
+
+                if curr.next:
+                    curr.next.prev = curr.prev
+
+                if curr == self.head:
+                    self.head = curr.next
+                if curr == self.tail:
+                    self.tail = curr.prev
+
+                curr.prev = None
+                curr.next = None
+                self.length -= 1
+                return curr.value
+
+            curr = curr.next
+            i += 1
+
 
 def main():
     node_a = Node("A")
@@ -82,11 +139,23 @@ def main():
     print("length", dll.length)
     dll.insert_at(node_e, 2)
     print("length after insert", dll.length)
+    dll.remove("B")
+    dll.remove_at(0)
+    print("length after removals", dll.length)
 
     curr = dll.head
     while curr:
         print(curr.value)
         curr = curr.next
+
+    print()
+    rcurr = dll.tail
+    while rcurr:
+        print(rcurr.value)
+        rcurr = rcurr.prev
+
+    # print()
+    # print(dll.get(1).value)
 
 
 if __name__ == "__main__":
