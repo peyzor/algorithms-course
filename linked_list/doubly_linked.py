@@ -11,6 +11,19 @@ class DoublyLinkedList:
         self.tail = tail
         self.length = 0
 
+    def debug(self):
+        out = ""
+        i = 0
+        curr = self.head
+        while curr:
+            out += f"{curr.prev.value if curr.prev else None} -> {curr.value} "
+            out += f"{curr.value} -> {curr.next.value if curr.next else None} "
+            curr = curr.next
+            i += 1
+
+        return out
+
+
     def prepend(self, node):
         if not self.head:
             self.head = node
@@ -154,8 +167,8 @@ def main():
         print(rcurr.value)
         rcurr = rcurr.prev
 
-    # print()
-    # print(dll.get(1).value)
+    print()
+    print(dll.debug())
 
 
 if __name__ == "__main__":
