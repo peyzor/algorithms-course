@@ -35,11 +35,6 @@ def bfs(graph, source, needle):
     return [source, *out]
 
 
-class Edge:
-    def __init__(self, destination):
-        self.to = destination
-
-
 def walk(graph, curr, needle, seen, path):
     if seen[curr]:
         return False
